@@ -11,12 +11,12 @@ using UIKit;
 
 namespace waterPlants.iOS
 {
-    [Register("ItemNewViewController")]
-    partial class ItemNewViewController
+    [Register("PlantNewViewController")]
+    partial class PlantNewViewController
     {
         [Outlet]
         [GeneratedCode("iOS Designer", "1.0")]
-        UIKit.UIButton btnSaveItem { get; set; }
+        UIKit.UIButton btnSavePlant { get; set; }
 
         [Outlet]
         [GeneratedCode("iOS Designer", "1.0")]
@@ -28,10 +28,10 @@ namespace waterPlants.iOS
 
         void ReleaseDesignerOutlets()
         {
-            if (btnSaveItem != null)
+            if (btnSavePlant != null)
             {
-                btnSaveItem.Dispose();
-                btnSaveItem = null;
+                btnSavePlant.Dispose();
+                btnSavePlant = null;
             }
 
             if (txtDesc != null)

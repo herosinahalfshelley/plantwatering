@@ -149,9 +149,9 @@
     <Compile Include="ViewControllers\BrowseViewController.designer.cs">
       <DependentUpon>BrowseViewController.cs</DependentUpon>
     </Compile>
-    <Compile Include="ViewControllers\ItemNewViewController.cs" />
-    <Compile Include="ViewControllers\ItemNewViewController.designer.cs">
-      <DependentUpon>ItemNewViewController.cs</DependentUpon>
+    <Compile Include="ViewControllers\PlantNewViewController.cs" />
+    <Compile Include="ViewControllers\PlantNewViewController.designer.cs">
+      <DependentUpon>PlantNewViewController.cs</DependentUpon>
     </Compile>
     <Compile Include="ViewControllers\LoginViewController.cs" />
     <Compile Include="ViewControllers\LoginViewController.designer.cs">

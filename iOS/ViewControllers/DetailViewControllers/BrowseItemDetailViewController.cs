@@ -5,7 +5,7 @@ namespace waterPlants.iOS
 {
     public partial class BrowseItemDetailViewController : UIViewController
     {
-        public ItemDetailViewModel ViewModel { get; set; }
+        public PlantDetailViewModel ViewModel { get; set; }
         public BrowseItemDetailViewController(IntPtr handle) : base(handle) { }
 
         public override void ViewDidLoad()
@@ -13,8 +13,8 @@ namespace waterPlants.iOS
             base.ViewDidLoad();
 
             Title = ViewModel.Title;
-            ItemNameLabel.Text = ViewModel.Item.Text;
-            ItemDescriptionLabel.Text = ViewModel.Item.Description;
+            ItemNameLabel.Text = ViewModel.Plant.PlantName;
+            ItemDescriptionLabel.Text = ViewModel.Plant.Description;
         }
     }
 }

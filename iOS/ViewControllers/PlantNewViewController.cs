@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Threading.Tasks;
-
+using waterPlants.Models;
+using waterPlants.ViewModels;
 using UIKit;
 
 namespace waterPlants.iOS
 {
-    public partial class ItemNewViewController : UIViewController
+    public partial class PlantNewViewController : UIViewController
     {
-        public Item Item { get; set; }
-        public ItemsViewModel viewModel { get; set; }
+        public Plant Plant { get; set; }
+        public PlantViewModel viewModel { get; set; }
         public BaseViewModel baseModel { get; set; }
 
-        public ItemNewViewController(IntPtr handle) : base(handle)
+        public PlantNewViewController(IntPtr handle) : base(handle)
         {
         }
 
@@ -20,12 +21,12 @@ namespace waterPlants.iOS
             base.ViewDidLoad();
             // Perform any additional setup after loading the view, typically from a nib.
 
-            btnSaveItem.TouchUpInside += (sender, e) =>
+            btnSavePlant.TouchUpInside += (sender, e) =>
             {
-                var _item = new Item();
-                _item.Text = txtTitle.Text;
+                var _item = new Plant();
+                _item.PlantName = txtTitle.Text;
                 _item.Description = txtDesc.Text;
-                MessagingCenter.Send(this, "AddItem", _item);
+                MessagingCenter.Send(this, "AddPlant", _item);
                 NavigationController.PopToRootViewController(true);
             };
         }

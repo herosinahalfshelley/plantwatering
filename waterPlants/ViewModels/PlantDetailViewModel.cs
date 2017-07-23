@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using waterPlants.Models;
 
 namespace waterPlants
 {
-    public class ItemDetailViewModel : BaseViewModel
+    public class PlantDetailViewModel : BaseViewModel
     {
-        public Item Item { get; set; }
-        public ItemDetailViewModel(Item item = null)
+        public Plant Plant { get; set; }
+        public PlantDetailViewModel(Plant item = null)
         {
             if (item != null)
             {
-                Title = item.Text;
-                Item = item;
+                Title = item.PlantName;
+                Plant = item;
             }
         }
 

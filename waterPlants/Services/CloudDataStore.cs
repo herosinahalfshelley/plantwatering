@@ -4,66 +4,68 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using waterPlants.Models;
+
 
 using Newtonsoft.Json;
 using Plugin.Connectivity;
 
 namespace waterPlants
 {
-    public class CloudDataStore : IDataStore<Item>
+    public class CloudDataStore : IDataStore<Plant>
     {
         HttpClient client;
-        IEnumerable<Item> items;
+        IEnumerable<Plant> items;
 
         public CloudDataStore()
         {
             client = new HttpClient();
             client.BaseAddress = new Uri($"{App.BackendUrl}/");
 
-            items = new List<Item>();
+            items = new List<Plant>();
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(bool forceRefresh = false)
+        public async Task<IEnumerable<Plant>> GetPlantsAsync(bool forceRefresh = false)
         {
             if (forceRefresh && CrossConnectivity.Current.IsConnected)
             {
                 var json = await client.GetStringAsync($"api/item");
-                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Item>>(json));
+                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Plant>>(json));
             }
 
             return items;
         }
 
-        public async Task<Item> GetItemAsync(string id)
+        public async Task<Plant> GetPlantAsync(string id)
         {
             if (id != null && CrossConnectivity.Current.IsConnected)
             {
                 var json = await client.GetStringAsync($"api/item/{id}");
-                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Item>>(json));
+                items = await Task.Run(() => JsonConvert.DeserializeObject<IEnumerable<Plant>>(json));
             }
 
             return null;
         }
 
-        public async Task<bool> AddItemAsync(Item item)
+        public async Task<bool> AddPlantAsync(Plant item)
         {
             if (item == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var serializedItem = JsonConvert.SerializeObject(item);
+            var serializedPlant = JsonConvert.SerializeObject(item);
 
-            var response = await client.PostAsync($"api/item", new StringContent(serializedItem, Encoding.UTF8, "application/json"));
+            var response = await client.PostAsync($"api/item", new StringContent(serializedPlant, Encoding.UTF8, "application/json"));
 
             return response.IsSuccessStatusCode ? true : false;
         }
 
-        public async Task<bool> UpdateItemAsync(Item item)
+        public async Task<bool> UpdatePlantAsync(Plant item)
         {
             if (item == null || item.Id == null || !CrossConnectivity.Current.IsConnected)
                 return false;
 
-            var serializedItem = JsonConvert.SerializeObject(item);
-            var buffer = System.Text.Encoding.UTF8.GetBytes(serializedItem);
+            var serializedPlant = JsonConvert.SerializeObject(item);
+            var buffer = System.Text.Encoding.UTF8.GetBytes(serializedPlant);
             var byteContent = new ByteArrayContent(buffer);
 
             var response = await client.PutAsync(new Uri($"api/item/{item.Id}"), byteContent);
@@ -71,7 +73,7 @@ namespace waterPlants
             return response.IsSuccessStatusCode ? true : false;
         }
 
-        public async Task<bool> DeleteItemAsync(string id)
+        public async Task<bool> DeletePlantAsync(string id)
         {
             if (string.IsNullOrEmpty(id) && !CrossConnectivity.Current.IsConnected)
                 return false;

@@ -1,11 +1,13 @@
-﻿namespace waterPlants
+﻿using waterPlants.Models;
+
+namespace waterPlants
 {
     public class BaseViewModel : ObservableObject
     {
         /// <summary>
         /// Get the azure service instance
         /// </summary>
-        public IDataStore<Item> DataStore => ServiceLocator.Instance.Get<IDataStore<Item>>();
+        public IDataStore<Plant> DataStore => ServiceLocator.Instance.Get<IDataStore<Plant>>();
 
         bool isBusy = false;
         public bool IsBusy
